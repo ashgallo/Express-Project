@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ./partials/head %>
+  </head>
+  <body>
+    <header>
+      <% include ./partials/header %>
+    </header>
+    <h1 class='center'>My Music</h1>
+    <hr />
+    <div class='row'>
+      <div class='col s12 m4'>
+        <h3>Add Artist & Song</h3>
+        <form action='/music_dev' method='post'>
+          <input type="text" name='title' placeholder='Title' />
+          <button class='btn btn-waves' type='submit'>Add</button>
+        </form>
+      </div>
+      <table class='table col m8 s12'>
+        <thead>
+          <th>Title</th>
+          <th>Edit</th>
+          <th>x</th>
+        </thead>
+        <tbody>
+          <% music.forEach( function(music) { %>
+          <% var url = "/music/" + music.id + "?_method=DELETE" %>
+          <% var editUrl = "/music/" + music.id + "/edit" %>
+            <tr>
+              <td><%= music.title %></td>
+              <td>
+                <a class="btn" href=<%= editUrl %>>Edit</a>
+              </td>
+              <td>
+                  <form method="POST" action=<%= url %>>
+                    <button class="btn red">Delete</button>
+                  </form>
+               </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
